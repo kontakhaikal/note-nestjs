@@ -2,13 +2,15 @@ import {
   Controller,
   Delete,
   Get,
+  HttpStatus,
   Inject,
   Post,
   Put,
   Req,
+  Res,
 } from '@nestjs/common';
 
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { NoteService } from '../services/note.service';
 import { Service } from '../types';
 
@@ -20,43 +22,74 @@ export class NoteController {
 
   @Post()
   async writeNote(
-    @Req() request: Request<{}, {}, { title: string; body: string }>,
+    @Req() req: Request<{}, {}, { title: string; body: string }>,
+    @Res() res: Response,
   ) {
-    const { title, body } = request.body;
-    return await this.noteService.writeNote({
-      title: title,
-      body: body,
-      userCredential: request.userCredential,
+    const result = await this.noteService.writeNote({
+      title: req.body.title,
+      body: req.body.body,
+      userCredential: req.userCredential,
+    });
+
+    return res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      status: HttpStatus.CREATED.toString(),
+      path: req.originalUrl,
+      timestamp: new Date(),
+      data: result,
     });
   }
 
   @Get()
-  async getNotes(@Req() request: Request) {
-    return await this.noteService.getNotes({
-      userCredential: request.userCredential,
+  async getNotes(@Req() req: Request, @Res() res: Response) {
+    const result = await this.noteService.getNotes({
+      userCredential: req.userCredential,
+    });
+
+    return res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      status: HttpStatus.OK.toString(),
+      path: req.originalUrl,
+      timestamp: new Date(),
+      data: result,
     });
   }
 
   @Delete('/:id')
-  async deleteNote(@Req() request: Request<{ id: string }, {}, {}>) {
-    const id = request.params['id'];
-    return await this.noteService.deleteNote({
-      id,
-      userCredential: request.userCredential,
+  async deleteNote(@Req() req: Request<{ id: string }>, @Res() res: Response) {
+    const result = await this.noteService.deleteNote({
+      id: req.params.id,
+      userCredential: req.userCredential,
+    });
+
+    return res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      status: HttpStatus.OK.toString(),
+      path: req.originalUrl,
+      timestamp: new Date(),
     });
   }
 
   @Put('/:id')
   async updateNote(
     @Req()
-    request: Request<{ id: string }, {}, { title: string; body: string }>,
+    req: Request<{ id: string }, {}, { title: string; body: string }>,
+    @Res()
+    res: Response,
   ) {
-    const id = request.params['id'];
-    return await this.noteService.updateNote({
-      id,
-      title: request.body.title,
-      body: request.body.body,
-      userCredential: request.userCredential,
+    const result = await this.noteService.updateNote({
+      id: req.params.id,
+      title: req.body.title,
+      body: req.body.body,
+      userCredential: req.userCredential,
+    });
+
+    return res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      status: HttpStatus.OK.toString(),
+      path: req.originalUrl,
+      timestamp: new Date(),
+      data: result,
     });
   }
 }
