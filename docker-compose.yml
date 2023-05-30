@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  note-nestjs-mysql:
+    container_name: note-nestjs-mysql
+    image: mysql:8.0.33
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: note_nestjs
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
