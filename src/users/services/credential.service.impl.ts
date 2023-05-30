@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { instanceToPlain } from 'class-transformer';
-import { UserCredential } from '../dto/user-credential.dto';
+import { UserCredential } from '../dto/user-credential';
 import { CredentialService } from './credential.service';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { UserCredential } from '../dto/user-credential.dto';
+import { UserCredential } from '../dto/user-credential';
 
 export interface CredentialService {
   generateCredentialToken(userCredential: UserCredential): Promise<string>;
