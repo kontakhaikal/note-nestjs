@@ -36,7 +36,7 @@ export function UseValidator(...types: ClassConstructor<any>[]) {
         errors.forEach((error) => {
           const messages = Object.values(error.constraints);
           errorMessage[error.property] =
-            messages.length === 1 ? messages : messages[0];
+            messages.length > 1 ? messages : messages[0];
         });
 
         throw new ValidationError(JSON.stringify(errorMessage));
