@@ -2,11 +2,11 @@
 
 ## **User**
 
-- **Sign In**
+- **Register**
 
   Method: **`POST`**
 
-  Endpint: `"/users/signin"`
+  Endpint: `"/users/register"`
 
   Request Body:
 
@@ -163,7 +163,7 @@
   ```json
   {
     "code": 200,
-    "status": "CREATED"
+    "status": "OK"
   }
   ```
 
