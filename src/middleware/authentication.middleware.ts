@@ -15,7 +15,7 @@ export class AuthenticationMiddleware implements NestMiddleware {
     const authorization = req.headers['authorization'];
 
     if (authorization === undefined) {
-      throw new AuthenticationError('Authorizationn headers is required');
+      throw new AuthenticationError('Authorization headers is required');
     }
 
     const [bearer, token] = authorization.split(' ');
