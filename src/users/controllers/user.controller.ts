@@ -1,9 +1,17 @@
-import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { Service } from '../types';
+import {
+  Body,
+  Controller,
+  HttpStatus,
+  Inject,
+  Post,
+  Req,
+  Res,
+} from '@nestjs/common';
+import { Request, Response } from 'express';
+import { UserLoginRequest } from '../dto/user-login';
+import { UserRegisterRequest } from '../dto/user-register';
 import { UserService } from '../services/user.service';
-import { UserSignInRequest } from '../dto/user-signin.dto';
-import { plainToInstance } from 'class-transformer';
-import { UserLoginRequest } from '../dto/user-login.dto';
+import { Service } from '../types';
 
 @Controller('users')
 export class UserController {
@@ -11,13 +19,35 @@ export class UserController {
     @Inject(Service.USER_SERVICE) private readonly userServie: UserService,
   ) {}
 
-  @Post('signin')
-  async signIn(@Body() body: UserSignInRequest) {
-    return await this.userServie.signIn(body);
+  @Post('register')
+  async register(
+    @Req() req: Request<{}, {}, UserRegisterRequest>,
+    @Res() res: Response,
+  ) {
+    const result = await this.userServie.register(req.body);
+
+    return res.status(HttpStatus.CREATED).json({
+      code: HttpStatus.CREATED,
+      status: HttpStatus.CREATED.toString(),
+      path: req.originalUrl,
+      timestamp: new Date(),
+      data: result,
+    });
   }
 
   @Post('login')
-  async LogIn(@Body() body: UserLoginRequest) {
-    return await this.userServie.logIn(body);
+  async login(
+    @Req() req: Request<{}, {}, UserLoginRequest>,
+    @Res() res: Response,
+  ) {
+    const result = await this.userServie.login(req.body);
+
+    return res.status(HttpStatus.OK).json({
+      code: HttpStatus.OK,
+      status: HttpStatus.OK.toString(),
+      path: req.originalUrl,
+      timestamp: new Date(),
+      data: result,
+    });
   }
 }

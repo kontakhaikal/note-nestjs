@@ -1,7 +1,7 @@
 import { IsNotEmpty, Validate } from 'class-validator';
 import { UsernameUniqueConstraint } from '../../validation/contraint';
 
-export class UserSignInRequest {
+export class UserRegisterRequest {
   @IsNotEmpty()
   @Validate(UsernameUniqueConstraint)
   public readonly username: string;
@@ -28,6 +28,6 @@ export class UserSignInRequest {
   }
 }
 
-export class UserSignInResponse {
+export class UserRegisterResponse {
   constructor(public readonly id: string) {}
 }

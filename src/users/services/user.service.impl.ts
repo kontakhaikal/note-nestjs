@@ -7,7 +7,10 @@ import { UseValidator } from '../../validation/decorator';
 import { Service } from '../types';
 import { UserCredential } from '../dto/user-credential';
 import { UserLoginRequest, UserLoginResponse } from '../dto/user-login';
-import { UserSignInRequest, UserSignInResponse } from '../dto/user-signin';
+import {
+  UserRegisterRequest,
+  UserRegisterResponse,
+} from '../dto/user-register';
 import { User } from '../entities/user.entity';
 import { CredentialService } from './credential.service';
 import { PasswordService } from './password.service';
@@ -24,7 +27,7 @@ export class UserServiceImpl implements UserService {
   ) {}
 
   @UseValidator(UserLoginRequest)
-  async logIn(request: UserLoginRequest): Promise<UserLoginResponse> {
+  async login(request: UserLoginRequest): Promise<UserLoginResponse> {
     const user = await this.userRepository.findOneBy({
       username: request.username,
     });
@@ -50,8 +53,8 @@ export class UserServiceImpl implements UserService {
     return new UserLoginResponse(credentialToken);
   }
 
-  @UseValidator(UserSignInRequest)
-  async signIn(request: UserSignInRequest): Promise<UserSignInResponse> {
+  @UseValidator(UserRegisterRequest)
+  async register(request: UserRegisterRequest): Promise<UserRegisterResponse> {
     const hashedPassword = await this.passwordService.hash(request.password);
 
     const user = new User(
@@ -64,6 +67,6 @@ export class UserServiceImpl implements UserService {
 
     await this.userRepository.save(user);
 
-    return new UserSignInResponse(user.id);
+    return new UserRegisterResponse(user.id);
   }
 }
