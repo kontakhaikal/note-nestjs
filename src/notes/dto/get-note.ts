@@ -1,13 +1,12 @@
-import { ValidateNested } from 'class-validator';
 import { UserCredential } from './user-credential';
 import { Note } from '../entities/note.entity';
+import { Localize } from '../../i18n/types';
 
-export class GetNotesRequest {
-  @ValidateNested()
-  public readonly userCredential: UserCredential;
-  constructor(userCredential: UserCredential) {
-    this.userCredential = userCredential;
-  }
+export class GetNotesRequest implements Localize {
+  constructor(
+    public readonly userCredential: UserCredential,
+    public readonly i18n?: { lang: string },
+  ) {}
 }
 
 export class GetNotesResponse {

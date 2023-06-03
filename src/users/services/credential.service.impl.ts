@@ -8,7 +8,7 @@ import { CredentialService } from './credential.service';
 export class CredentialServiceImpl implements CredentialService {
   constructor(private readonly jwtService: JwtService) {}
 
-  async retriveUserCredential(
+  async retrieveUserCredential(
     credentialToken: string,
   ): Promise<UserCredential> {
     const userCredential =

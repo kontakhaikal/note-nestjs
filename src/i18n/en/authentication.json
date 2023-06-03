@@ -1,0 +1,5 @@
+{
+  "NOT_EXIST": "Authorization header is required",
+  "NOT_BEARER": "Authorization header should start with 'Bearer'",
+  "INVALID": "Authorization header invalid"
+}

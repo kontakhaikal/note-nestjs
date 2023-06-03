@@ -1,27 +1,32 @@
-import { IsNotEmpty, ValidateNested } from 'class-validator';
+import { IsNotEmpty, Length, Max } from 'class-validator';
+import { Localize } from '../../i18n/types';
 import { UserCredential } from './user-credential';
+import { i18nValidationMessage } from 'nestjs-i18n';
+import { Trim } from '../../validation/transformer';
 
-export class UpdateNoteRequest {
-  @IsNotEmpty()
+export class UpdateNoteRequest implements Localize {
+  @IsNotEmpty({ message: i18nValidationMessage('validation.NOT_EMPTY') })
   readonly id: string;
 
-  @IsNotEmpty()
+  @Trim()
+  @IsNotEmpty({ message: i18nValidationMessage('validation.NOT_EMPTY') })
+  @Length(1, 60, { message: i18nValidationMessage('validation.LENGTH') })
   readonly title: string;
 
-  @IsNotEmpty()
+  @Trim()
+  @IsNotEmpty({ message: i18nValidationMessage('validation.NOT_EMPTY') })
+  @Length(1, 10_000, { message: i18nValidationMessage('validation.LENGTH') })
   readonly body: string;
 
-  @ValidateNested()
-  readonly userCredential: UserCredential;
   constructor(
     id: string,
     title: string,
     body: string,
-    userCredential: UserCredential,
+    public readonly userCredential: UserCredential,
+    public readonly i18n?: { lang: string },
   ) {
     this.id = id;
     this.title = title;
     this.body = body;
-    this.userCredential = userCredential;
   }
 }

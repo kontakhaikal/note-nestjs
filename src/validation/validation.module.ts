@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
-import { UsernameUniqueConstraint } from './contraint';
+import { UsernameUniqueConstraint } from './constraint';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],

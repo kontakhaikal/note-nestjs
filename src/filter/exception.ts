@@ -8,7 +8,6 @@ import { Request, Response } from 'express';
 import { AuthenticationError } from '../error/authentication-error';
 import { ResourceNotFoundError } from '../error/resource-notfound-error';
 import { ValidationError } from '../error/validation-error';
-import { error } from 'console';
 
 @Catch(AuthenticationError)
 export class AuthenticationErrorFilter implements ExceptionFilter {
@@ -48,7 +47,7 @@ export class ResourceNotFoundErrorFilter implements ExceptionFilter {
 
 @Catch(ValidationError)
 export class ValidationErrorFilter implements ExceptionFilter {
-  catch(exception: ValidationError, host: ArgumentsHost) {
+  catch(exception: ValidationError<any>, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
@@ -59,7 +58,7 @@ export class ValidationErrorFilter implements ExceptionFilter {
       status: 'BAD_REQUEST',
       path: request.originalUrl,
       timestamp: new Date(),
-      error: JSON.parse(exception.message),
+      error: exception.detail,
     });
   }
 }

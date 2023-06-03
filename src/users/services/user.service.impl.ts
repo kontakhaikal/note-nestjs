@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
 import { Repository } from 'typeorm';
 import { AuthenticationError } from '../../error/authentication-error';
-import { UseValidator } from '../../validation/decorator';
+import { UseI18nValidator, UseValidator } from '../../validation/decorator';
 import { Service } from '../types';
 import { UserCredential } from '../dto/user-credential';
 import { UserLoginRequest, UserLoginResponse } from '../dto/user-login';
@@ -53,7 +53,7 @@ export class UserServiceImpl implements UserService {
     return new UserLoginResponse(credentialToken);
   }
 
-  @UseValidator(UserRegisterRequest)
+  @UseI18nValidator(UserRegisterRequest)
   async register(request: UserRegisterRequest): Promise<UserRegisterResponse> {
     const hashedPassword = await this.passwordService.hash(request.password);
 

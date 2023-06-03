@@ -1,0 +1,15 @@
+{
+  "NOT_EMPTY": "{property} cannot be left empty",
+  "USERNAME_UNIQUE": "username is already taken",
+  "LENGTH": "{property} must have a length between {constraints.0} and {constraints.1}",
+  "ALPHANUMERIC": "{property} must contain only alphanumeric characters",
+  "LOWERCASE": "{property} must be in lowercase",
+  "USERNAME": "Username should only contain alphanumeric characters and dots (no sequential dots)",
+  "PASSWORD": {
+    "LOWERCASE": "password should contain at least one lowercase letter.",
+    "UPPERCASE": "password should contain at least one uppercase letter.",
+    "DIGIT": "password should contain at least one digit.",
+    "SPECIAL": "password should contain at least one special character.",
+    "LENGTH": "password should be at least 8 characters long."
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "NOT_EXIST": "Authorization header diperlukan",
+  "NOT_BEARER": "Authorization header harus diawali dengan 'Bearer'",
+  "INVALID": "Authorization header tidak valid"
+}

@@ -1,30 +1,38 @@
-import {
-  Body,
-  Controller,
-  HttpStatus,
-  Inject,
-  Post,
-  Req,
-  Res,
-} from '@nestjs/common';
+import { Controller, HttpStatus, Inject, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { UserLoginRequest } from '../dto/user-login';
-import { UserRegisterRequest } from '../dto/user-register';
 import { UserService } from '../services/user.service';
 import { Service } from '../types';
 
-@Controller('users')
+@Controller()
 export class UserController {
   constructor(
-    @Inject(Service.USER_SERVICE) private readonly userServie: UserService,
+    @Inject(Service.USER_SERVICE) private readonly userService: UserService,
   ) {}
 
   @Post('register')
   async register(
-    @Req() req: Request<{}, {}, UserRegisterRequest>,
+    @Req()
+    req: Request<
+      {},
+      {},
+      {
+        username: string;
+        firstName: string;
+        lastName: string;
+        password: string;
+      }
+    >,
     @Res() res: Response,
   ) {
-    const result = await this.userServie.register(req.body);
+    const lang = req.headers['accept-language'];
+    const result = await this.userService.register({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      password: req.body.password,
+      i18n: { lang },
+    });
 
     return res.status(HttpStatus.CREATED).json({
       code: HttpStatus.CREATED,
@@ -40,7 +48,7 @@ export class UserController {
     @Req() req: Request<{}, {}, UserLoginRequest>,
     @Res() res: Response,
   ) {
-    const result = await this.userServie.login(req.body);
+    const result = await this.userService.login(req.body);
 
     return res.status(HttpStatus.OK).json({
       code: HttpStatus.OK,

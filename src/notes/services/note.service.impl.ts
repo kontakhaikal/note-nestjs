@@ -3,11 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
 import { WriteNoteRequest } from '../dto/write-note';
 import { Note } from '../entities/note.entity';
-
 import { NoteService } from './note.service';
 import { Repository } from 'typeorm';
 import { GetNotesRequest } from '../dto/get-note';
-import { UseValidator } from '../../validation/decorator';
+import { UseI18nValidator } from '../../validation/decorator';
 import { DeleteNoteRequest } from '../dto/delete-note';
 import { UpdateNoteRequest } from '../dto/update-note';
 import { ResourceNotFoundError } from '../../error/resource-notfound-error';
@@ -19,7 +18,7 @@ export class NoteServiceImpl implements NoteService {
     private readonly noteRepository: Repository<Note>,
   ) {}
 
-  @UseValidator(DeleteNoteRequest)
+  @UseI18nValidator(DeleteNoteRequest)
   async deleteNote(request: DeleteNoteRequest): Promise<void> {
     const note = await this.noteRepository.findOneBy({
       id: request.id,
@@ -33,7 +32,7 @@ export class NoteServiceImpl implements NoteService {
     await this.noteRepository.delete({ id: request.id });
   }
 
-  @UseValidator(UpdateNoteRequest)
+  @UseI18nValidator(UpdateNoteRequest)
   async updateNote(request: UpdateNoteRequest): Promise<Note> {
     const note = await this.noteRepository.findOneBy({
       id: request.id,
@@ -53,12 +52,12 @@ export class NoteServiceImpl implements NoteService {
     return note;
   }
 
-  @UseValidator(GetNotesRequest)
+  @UseI18nValidator(GetNotesRequest)
   async getNotes(request: GetNotesRequest): Promise<Note[]> {
     return this.noteRepository.findBy({ author: request.userCredential.id });
   }
 
-  @UseValidator(WriteNoteRequest)
+  @UseI18nValidator(WriteNoteRequest)
   async writeNote(request: WriteNoteRequest): Promise<Note> {
     const now = new Date();
 

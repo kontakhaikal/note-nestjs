@@ -29,6 +29,7 @@ export class NoteController {
       title: req.body.title,
       body: req.body.body,
       userCredential: req.userCredential,
+      i18n: { lang: req.headers['accept-language'] },
     });
 
     return res.status(HttpStatus.CREATED).json({
@@ -44,6 +45,7 @@ export class NoteController {
   async getNotes(@Req() req: Request, @Res() res: Response) {
     const result = await this.noteService.getNotes({
       userCredential: req.userCredential,
+      i18n: { lang: req.headers['accept-language'] },
     });
 
     return res.status(HttpStatus.OK).json({
@@ -60,6 +62,7 @@ export class NoteController {
     const result = await this.noteService.deleteNote({
       id: req.params.id,
       userCredential: req.userCredential,
+      i18n: { lang: req.headers['accept-language'] },
     });
 
     return res.status(HttpStatus.OK).json({
@@ -82,6 +85,7 @@ export class NoteController {
       title: req.body.title,
       body: req.body.body,
       userCredential: req.userCredential,
+      i18n: { lang: req.headers['accept-language'] },
     });
 
     return res.status(HttpStatus.OK).json({

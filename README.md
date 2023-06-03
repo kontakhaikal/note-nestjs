@@ -6,7 +6,16 @@
 
   Method: **`POST`**
 
-  Endpint: `"/users/register"`
+  Endpoint: `"/register"`
+
+  Headers:
+
+  ```json
+  {
+    "Content-Type": "application/json",
+    "Accept-Language": "en | id"
+  }
+  ```
 
   Request Body:
 
@@ -35,7 +44,16 @@
 
   Method: **`POST`**
 
-  Endpint: `"/users/login"`
+  Endpoint: `"/login"`
+
+  Headers:
+
+  ```json
+  {
+    "Content-Type": "application/json",
+    "Accept-Language": "en | id"
+  }
+  ```
 
   Request Body:
 
@@ -64,14 +82,15 @@
 
   Method: **`POST`**
 
-  Endpint: `"/notes"`
+  Endpoint: `"/notes"`
 
   Headers:
 
   ```json
   {
     "Content-Type": "application/json",
-    "Authorization": "Bearer ${credentialToken}"
+    "Authorization": "Bearer ${credentialToken}",
+    "Accept-Language": "id | en"
   }
   ```
 
@@ -105,7 +124,7 @@
 
   Method: **`GET`**
 
-  Endpint: `"/notes"`
+  Endpoint: `"/notes"`
 
   Headers:
 
@@ -147,14 +166,15 @@
 
   Method: **`DELETE`**
 
-  Endpint: `"/notes/{id}"`
+  Endpoint: `"/notes/{id}"`
 
   Headers:
 
   ```json
   {
     "Content-Type": "application/json",
-    "Authorization": "Bearer ${credentialToken}"
+    "Authorization": "Bearer ${credentialToken}",
+    "Accept-Language": "id | en"
   }
   ```
 
@@ -171,14 +191,15 @@
 
   Method: **`PUT`**
 
-  Endpint: `"/notes/{id}"`
+  Endpoint: `"/notes/{id}"`
 
   Headers:
 
   ```json
   {
     "Content-Type": "application/json",
-    "Authorization": "Bearer ${credentialToken}"
+    "Authorization": "Bearer ${credentialToken}",
+    "Accept-Language": "id | en"
   }
   ```
 

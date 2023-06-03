@@ -1,0 +1,15 @@
+{
+  "NOT_EMPTY": "{property} tidak boleh kosong",
+  "USERNAME_UNIQUE": "username sudah digunakan",
+  "LENGTH": "{property} harus memiliki panjang antara {constraints.0} dan {constraints.1}",
+  "ALPHANUMERIC": "{property} hanya boleh berupa karakter alfanumerik",
+  "LOWERCASE": "{property} harus huruf kecil",
+  "USERNAME": "username hanya boleh mengandung karakter alfanumerik dan titik (tanpa titik berurutan)",
+  "PASSWORD": {
+    "LOWERCASE": "kata sandi harus mengandung setidaknya satu huruf kecil.",
+    "UPPERCASE": "kata sandi harus mengandung setidaknya satu huruf besar.",
+    "DIGIT": "kata sandi harus mengandung setidaknya satu angka.",
+    "SPECIAL": "kata sandi harus mengandung setidaknya satu karakter khusus.",
+    "LENGTH": "kata sandi harus terdiri dari setidaknya 8 karakter."
+  }
+}
