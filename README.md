@@ -149,7 +149,7 @@
         "author": "string",
         "updatedAt": "timestamp",
         "createdAt": "timestamp"
-      }
+      },
       {
         "id": "string",
         "title": "string",
